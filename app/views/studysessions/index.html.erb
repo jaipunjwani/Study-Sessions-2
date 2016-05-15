@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Studysessions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Subject</th>
+      <th>Location</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @studysessions.each do |studysession| %>
+      <tr>
+        <td><%= studysession.subject %></td>
+        <td><%= studysession.location %></td>
+        <td><%= studysession.description %></td>
+        <td><%= link_to 'Show', studysession %></td>
+        <td><%= link_to 'Edit', edit_studysession_path(studysession) %></td>
+        <td><%= link_to 'Destroy', studysession, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Studysession', new_studysession_path %>

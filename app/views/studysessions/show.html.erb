@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @studysession.subject %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @studysession.location %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @studysession.description %>
+</p>
+
+<%= link_to 'Edit', edit_studysession_path(@studysession) %> |
+<%= link_to 'Back', studysessions_path %>
