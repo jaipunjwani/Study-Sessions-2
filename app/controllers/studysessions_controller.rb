@@ -1,5 +1,6 @@
 class StudysessionsController < ApplicationController
   before_action :set_studysession, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /studysessions
   # GET /studysessions.json
@@ -25,7 +26,8 @@ class StudysessionsController < ApplicationController
   # POST /studysessions.json
   def create
     @studysession = Studysession.new(studysession_params)
-
+   #studysession = current_user.studysessions.new(studysession_params)
+    @studysession.users << current_user
     respond_to do |format|
       if @studysession.save
         format.html { redirect_to @studysession, notice: 'Studysession was successfully created.' }
