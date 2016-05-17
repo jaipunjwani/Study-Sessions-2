@@ -10,13 +10,11 @@
   <thead>
     <tr>
       <th>Subject</th>
-      <% if current_user!= nil %>
       <th>Location</th>
       <th>Description</th>
-      <th colspan="3"></th>
-      <% else %>
-      <th colspan="1"></th>
-      <% end%>
+      <th>Members</th>
+      <th colspan="4"></th>
+      
       
     </tr>
   </thead>
@@ -24,22 +22,22 @@
   <tbody>
     <% @studysessions.each do |studysession| %>
       <tr>
-        <td><%= studysession.subject %></td>
-        <td><%= studysession.location %></td>
-        <td><%= studysession.description %></td>
+        <td><center><%= studysession.subject %></center></td>
+        <td><center><%= studysession.location %></center></td>
+        <td><center><%= studysession.description %></center></td>
+        <td> <center> <%= member_size(studysession) %></center> </td>
         <td><%= link_to 'View', studysession %></td>
-        <% if is_leader?(studysession, current_user) %>
+        <% if is_leader?(studysession, current_user) || current_user.is_admin %>
         <td><%= link_to 'Edit', edit_studysession_path(studysession) %></td>
         <td><%= link_to 'Delete', studysession, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% elsif is_member?(studysession, current_user) %>
         <td><%= link_to 'Leave', studysession_leave_session_path(studysession.id) %></td>
-         <td><%='dummy'%></td>
+         <td><%='     '%></td>
         <% else %>
         <td><%= link_to 'Join', studysession_join_session_path(studysession.id) %></td>
-        <td><%=    'dummy'          %></td>
+        <td><%=    '     '          %></td>
         <% end %>
        
-        <td> <%= member_size(studysession) %> </td>
       </tr>
     <% end %>
     

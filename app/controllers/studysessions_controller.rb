@@ -44,8 +44,8 @@ class StudysessionsController < ApplicationController
   def member_size(sess)
     list = sess.users
     len = list.size
-    str = " #{len} member(s)" 
-    return str
+    #str = " #{len} member(s)" 
+    return len
   end
   helper_method :member_size
   
