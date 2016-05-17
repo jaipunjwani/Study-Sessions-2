@@ -1,12 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Study Sessions at Adelphi University</h1>
+<h1><center>Study Sessions at Adelphi University</center></h1>
 
 <% if current_user == nil %>
-<%= link_to 'View Study Sessions', new_user_session_path %>
+<center><bold><%= link_to 'View Study Sessions', new_user_session_path %></bold></center>
 
 <% else %>
-<table>
+<center>
+<div class="table">
+<table border="1">
   <thead>
     <tr>
       <th>Subject</th>
@@ -18,7 +20,7 @@
       
     </tr>
   </thead>
-
+<div class="tr" >
   <tbody>
     <% @studysessions.each do |studysession| %>
       <tr>
@@ -42,12 +44,15 @@
     <% end %>
     
   </tbody>
+  </div>
 </table>
+</div>
+</center>
 
 <br>
 
 <% if current_user != nil %>
-<%= link_to 'New Studysession', new_studysession_path %>
+<center><%= link_to 'New Studysession', new_studysession_path %></center>
 <% end %>
 
 <% end %>
