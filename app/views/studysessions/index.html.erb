@@ -24,16 +24,18 @@
         <% if current_user!= nil %>
         <td><%= studysession.location %></td>
         <td><%= studysession.description %></td>
-        <td><%= link_to 'Show', studysession %></td>
+        <td><%= link_to 'View', studysession %></td>
         <td><%= link_to 'Edit', edit_studysession_path(studysession) %></td>
-        <td><%= link_to 'Destroy', studysession, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', studysession, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% else %>
         <td><%=                  %></td>
         <td><%=                  %></td>
-        <td><%= link_to 'Show', studysession %></td>
-         <td><%=                  %></td>
+        <td><%=                  %></td>
+        <td><%=                  %></td>
         <td><%=                  %></td>
         <% end %>
+        
+        <td> <%= list_members(studysession) %> </td>
       </tr>
     <% end %>
   </tbody>
@@ -41,4 +43,6 @@
 
 <br>
 
+<% if current_user != nil %>
 <%= link_to 'New Studysession', new_studysession_path %>
+<% end %>

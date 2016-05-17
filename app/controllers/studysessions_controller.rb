@@ -2,10 +2,44 @@ class StudysessionsController < ApplicationController
   before_action :set_studysession, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
+  def session_member? (sess, mem)
+    userlist = sess.users
+    userlist.each do |user|
+      if mem.id == user.id
+        return true
+      end
+    end  
+    return false;
+  end  
+  helper_method :session_member?
+  
+  def list_members (sess)
+    list = sess.users
+    userstr = ""
+    list.each do |user|
+      userstr = userstr + user.email
+    end  
+    return userstr
+  end  
+  helper_method :list_members
+  
+  def join_session(sess, member)
+    sess.users << member
+  end  
+  helper_method :join_session  
+  
+    
+  
   # GET /studysessions
   # GET /studysessions.json
   def index
     @studysessions = Studysession.all
+    @userlist =[]
+    index =0
+    @studysessions.each do |session|
+      @userlist[index] = session.users
+      index = index + 1
+    end
   end
 
   # GET /studysessions/1
