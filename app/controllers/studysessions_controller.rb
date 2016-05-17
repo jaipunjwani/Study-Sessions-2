@@ -2,20 +2,38 @@ class StudysessionsController < ApplicationController
   before_action :set_studysession, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
-  def session_member? (sess, mem)
+  def redir
+    redirect_to studysessions_url
+  end  
+  helper_method :redir
+  
+  def is_member? (sess, mem)
     userlist = sess.users
-    userlist.each do |user|
-      if mem.id == user.id
+    for i in userlist
+      if i == mem
         return true
       end
     end  
     return false;
   end  
-  helper_method :session_member?
+  helper_method :is_member?
+  
+  #named is_leader instead of is_admin to avoid naming conflicts
+  def is_leader? (sess, mem)
+    userlist = sess.users
+    firstuser = userlist[0]
+      if firstuser != nil && firstuser.id == mem.id
+        return true
+      else 
+        return false
+      end  
+  end  
+  helper_method :is_leader?
   
   def list_members (sess)
     list = sess.users
     userstr = ""
+    length = list.size
     list.each do |user|
       userstr = userstr + user.email
     end  
@@ -23,10 +41,37 @@ class StudysessionsController < ApplicationController
   end  
   helper_method :list_members
   
-  def join_session(sess, member)
-    sess.users << member
+  def member_size(sess)
+    list = sess.users
+    len = list.size
+    str = " #{len} member(s)" 
+    return str
+  end
+  helper_method :member_size
+  
+  # GET /studysessions/:studysession_id/join_session
+  def join_session
+    Studysession.find(params[:studysession_id]).users << current_user
+    redirect_to studysessions_url
   end  
   helper_method :join_session  
+  
+  # GET /studysessions/:studysession_id/leave_session
+  def leave_session
+    Studysession.find(params[:studysession_id]).users.delete(current_user)
+    redirect_to studysessions_url
+  end
+  helper_method :leave_session
+  
+  def test_multiple_members
+    sess = Studysession.create(subject: 'test4', location: 'home4', description: 'des4')
+   # user1 = User.create!(email: '13@example.com', password: 'password', password_confirmation: 'password', is_admin: false)
+  #  user2 = User.create!(email: '14@example.com', password: 'password', password_confirmation: 'password', is_admin: false)
+    sess.users << current_user
+    sess.users << User.find(5)
+    
+  end
+  helper_method :test_multiple_members
   
     
   
@@ -78,7 +123,7 @@ class StudysessionsController < ApplicationController
   def update
     respond_to do |format|
       if @studysession.update(studysession_params)
-        format.html { redirect_to @studysession, notice: 'Studysession was successfully updated.' }
+        format.html { redirect_to @studysession, notice: 'Study session was successfully updated.' }
         format.json { render :show, status: :ok, location: @studysession }
       else
         format.html { render :edit }
@@ -92,7 +137,7 @@ class StudysessionsController < ApplicationController
   def destroy
     @studysession.destroy
     respond_to do |format|
-      format.html { redirect_to studysessions_url, notice: 'Studysession was successfully destroyed.' }
+      format.html { redirect_to studysessions_url, notice: 'Study session was successfully deleted.' }
       format.json { head :no_content }
     end
   end

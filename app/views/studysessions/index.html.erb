@@ -1,7 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Studysessions</h1>
+<h1>Study Sessions at Adelphi University</h1>
 
+<% if current_user == nil %>
+<%= link_to 'View Study Sessions', new_user_session_path %>
+
+<% else %>
 <table>
   <thead>
     <tr>
@@ -21,23 +25,24 @@
     <% @studysessions.each do |studysession| %>
       <tr>
         <td><%= studysession.subject %></td>
-        <% if current_user!= nil %>
         <td><%= studysession.location %></td>
         <td><%= studysession.description %></td>
         <td><%= link_to 'View', studysession %></td>
+        <% if is_leader?(studysession, current_user) %>
         <td><%= link_to 'Edit', edit_studysession_path(studysession) %></td>
         <td><%= link_to 'Delete', studysession, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% elsif is_member?(studysession, current_user) %>
+        <td><%= link_to 'Leave', studysession_leave_session_path(studysession.id) %></td>
+         <td><%='dummy'%></td>
         <% else %>
-        <td><%=                  %></td>
-        <td><%=                  %></td>
-        <td><%=                  %></td>
-        <td><%=                  %></td>
-        <td><%=                  %></td>
+        <td><%= link_to 'Join', studysession_join_session_path(studysession.id) %></td>
+        <td><%=    'dummy'          %></td>
         <% end %>
-        
-        <td> <%= list_members(studysession) %> </td>
+       
+        <td> <%= member_size(studysession) %> </td>
       </tr>
     <% end %>
+    
   </tbody>
 </table>
 
@@ -45,4 +50,6 @@
 
 <% if current_user != nil %>
 <%= link_to 'New Studysession', new_studysession_path %>
+<% end %>
+
 <% end %>
