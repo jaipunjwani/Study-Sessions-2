@@ -109,7 +109,7 @@ class StudysessionsController < ApplicationController
     @studysession.users << current_user
     respond_to do |format|
       if @studysession.save
-        format.html { redirect_to @studysession, notice: 'Studysession was successfully created.' }
+        format.html { redirect_to @studysession }
         format.json { render :show, status: :created, location: @studysession }
       else
         format.html { render :new }
@@ -123,7 +123,7 @@ class StudysessionsController < ApplicationController
   def update
     respond_to do |format|
       if @studysession.update(studysession_params)
-        format.html { redirect_to @studysession, notice: 'Study session was successfully updated.' }
+        format.html { redirect_to @studysession }
         format.json { render :show, status: :ok, location: @studysession }
       else
         format.html { render :edit }
@@ -137,7 +137,7 @@ class StudysessionsController < ApplicationController
   def destroy
     @studysession.destroy
     respond_to do |format|
-      format.html { redirect_to studysessions_url, notice: 'Study session was successfully deleted.' }
+      format.html { redirect_to studysessions_url }
       format.json { head :no_content }
     end
   end

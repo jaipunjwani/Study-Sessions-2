@@ -7,27 +7,27 @@
 
 <% else %>
 <center>
-<div class="table">
-<table border="1">
+
+<table class="table table-striped">
+  <div class ="table-header" >
   <thead>
     <tr>
-      <th>Subject</th>
-      <th>Location</th>
-      <th>Description</th>
-      <th>Members</th>
+      <th><center>Subject</center></th>
+      <th><center>Location</center></th>
+      <th><center>Description</center></th>
+      <th><center>Members</center></th>
       <th colspan="4"></th>
-      
-      
     </tr>
   </thead>
+  </div>
 <div class="tr" >
   <tbody>
     <% @studysessions.each do |studysession| %>
       <tr>
-        <td><center><%= studysession.subject %></center></td>
-        <td><center><%= studysession.location %></center></td>
-        <td><center><%= studysession.description %></center></td>
-        <td> <center> <%= member_size(studysession) %></center> </td>
+        <td><%= studysession.subject %></td>
+        <td><%= studysession.location %></td>
+        <td><%= studysession.description %></td>
+        <td><%= member_size(studysession) %></td>
         <td><%= link_to 'View', studysession %></td>
         <% if is_leader?(studysession, current_user) || current_user.is_admin %>
         <td><%= link_to 'Edit', edit_studysession_path(studysession) %></td>
@@ -46,7 +46,7 @@
   </tbody>
   </div>
 </table>
-</div>
+
 </center>
 
 <br>
