@@ -3,7 +3,7 @@
 <h1><center>Study Sessions at Adelphi University</center></h1>
 
 <% if current_user == nil %>
-<center><bold><%= link_to 'View Study Sessions', new_user_session_path %></bold></center>
+<center><%= link_to 'View Study Sessions', new_user_session_path,class: 'btn btn-default btn-large' %></center>
 
 <% else %>
 <center>
@@ -52,7 +52,7 @@
 <br>
 
 <% if current_user != nil %>
-<center><%= link_to 'New Studysession', new_studysession_path %></center>
+<center><%= link_to 'New Studysession', new_studysession_path, class: 'btn btn-default' %></center>
 <% end %>
 
 <% end %>

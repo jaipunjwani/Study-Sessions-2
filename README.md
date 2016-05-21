@@ -1,22 +1,14 @@
+Project Functionality:
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+1. Add Study Session (with subject, location, description)
+2. Delete/Modify Study session if admin
+3. Join/leave Study session if non-member/member
 
+ADMIN ACCOUNT: Username: 'admin@example.com'  
+               Password: 'password'
 
-Welcome to your Rails project on Cloud9 IDE!
-
-To get started, just do the following:
-
-1. Run the project with the "Run Project" button in the menu bar on top of the IDE.
-2. Preview your new app by clicking on the URL that appears in the Run panel below (https://study-sessions-2-jaipunjwani.c9users.io/).
-
-Happy coding!
-The Cloud9 IDE team
-
+USER ACCOUNT: Username: 'user@example.com'  
+              Password: 'password'
 
 ## Support & Documentation
 
