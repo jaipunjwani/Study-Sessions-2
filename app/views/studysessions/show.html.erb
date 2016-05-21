@@ -16,6 +16,10 @@
   <%= @studysession.description %>
 </p>
 <p>
+  <strong>Members:</strong>
+  <%= member_size(@studysession) %>
+</p>
+<p>
   <strong>Admin:</strong>
   <%=get_leader(@studysession).email%>
 </p>

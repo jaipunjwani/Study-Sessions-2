@@ -1,7 +1,7 @@
 class StudysessionsController < ApplicationController
   before_action :set_studysession, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-
+  
   def redir
     redirect_to studysessions_url
   end  
@@ -86,7 +86,18 @@ class StudysessionsController < ApplicationController
   # GET /studysessions
   # GET /studysessions.json
   def index
-  @studysessions = Studysession.order("lower(subject) ASC").all
+ 
+ #   @studysessions = Studysession.order("lower(subject) ASC").all
+  if params[:sort] != nil
+    #if params[:sort] == "members" 
+     # @studysessions = Studysession.all
+    #else
+      @studysessions = Studysession.order("lower(#{params[:sort]})").all 
+    #end
+  else  
+    @studysessions = Studysession.order("lower(subject) ASC").all #default - sort alphabetically
+  end  
+  
 
   #not used right now
     @userlist =[]
@@ -160,6 +171,6 @@ class StudysessionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def studysession_params
-      params.require(:studysession).permit(:subject, :location, :description)
+      params.require(:studysession).permit(:subject, :location, :description, :members)
     end
 end
