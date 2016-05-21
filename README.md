@@ -3,6 +3,8 @@ Project Functionality:
 1. Add Study Session (with subject, location, description)
 2. Delete/Modify Study session if admin
 3. Join/leave Study session if non-member/member
+4. Study Sessions sorted alphabetically
+5. View study session details (including admin and created/updated time)
 
 ADMIN ACCOUNT: Username: 'admin@example.com'  
                Password: 'password'

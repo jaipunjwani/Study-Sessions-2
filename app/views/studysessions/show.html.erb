@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+<div class= "show-session">
 <p>
   <strong>Subject:</strong>
   <%= @studysession.subject %>
@@ -14,6 +15,21 @@
   <strong>Description:</strong>
   <%= @studysession.description %>
 </p>
+<p>
+  <strong>Admin:</strong>
+  <%=get_leader(@studysession).email%>
+</p>
 
+<p>
+  <strong>Created:</strong>
+  <%= @studysession.created_at %>
+</p>
+<strong>Last Updated:</strong>
+  <%= @studysession.updated_at %>
+<p>
+  
+</p>
 <%= link_to 'Edit', edit_studysession_path(@studysession) %> |
 <%= link_to 'Back', studysessions_path %>
+
+</div>

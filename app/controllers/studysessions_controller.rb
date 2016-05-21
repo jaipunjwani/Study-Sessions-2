@@ -30,6 +30,14 @@ class StudysessionsController < ApplicationController
   end  
   helper_method :is_leader?
   
+  def get_leader(sess)
+     userlist = sess.users
+     firstuser = userlist[0]
+     return firstuser
+  end  
+  helper_method :get_leader
+    
+  
   def list_members (sess)
     list = sess.users
     userstr = ""
@@ -78,7 +86,9 @@ class StudysessionsController < ApplicationController
   # GET /studysessions
   # GET /studysessions.json
   def index
-    @studysessions = Studysession.all
+  @studysessions = Studysession.order("lower(subject) ASC").all
+
+  #not used right now
     @userlist =[]
     index =0
     @studysessions.each do |session|
