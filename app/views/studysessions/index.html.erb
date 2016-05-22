@@ -12,9 +12,9 @@
   <div class ="table-header" >
   <thead>
     <tr>
-      <th><center><%= link_to 'Subject', :sort => "subject" %></center></th>
-      <th><center><%= link_to 'Location', :sort => "location" %></center></th>
-      <th><center><%= link_to 'Description' , :sort => "description" %></center></th>
+      <th><center><%= sortable 'subject', "Subject" %></center></th>
+      <th><center><%= sortable 'location', "Location" %></center></th>
+      <th><center><%= sortable 'description' , "Description" %></center></th>
       <th><center>Members</center></th>
       <th colspan="4"></th>
     </tr>
@@ -53,7 +53,9 @@
 
 <% if current_user != nil %>
 <center>
-  <%= link_to 'New Session', new_studysession_path, class: 'btn btn-default' %>
+  <%= link_to  new_studysession_path, class: 'btn btn-default' do %>
+  <i class="glyphicon glyphicon-plus"></i> New Session
+  <% end %>
   </center>
   
   <!-- creating a button that is a link but also bold >

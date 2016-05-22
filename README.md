@@ -4,7 +4,7 @@ Project Functionality:
 2. Delete/Modify Study session if admin
 3. Join/leave Study session if non-member/member
 4. View study session details (including admin and created/updated time)
-5. Sort Sessions by subject, location, description
+5. Toggle Sort Sessions by subject, location, description
 
 ADMIN ACCOUNT: Username: 'admin@example.com'  
                Password: 'password'

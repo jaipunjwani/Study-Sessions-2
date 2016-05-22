@@ -90,7 +90,7 @@ class StudysessionsController < ApplicationController
       #if params[:sort] == "members" 
       # @studysessions = Studysession.all
       #else
-        @studysessions = Studysession.order("lower(#{params[:sort]})").all 
+        @studysessions = Studysession.order("lower(#{params[:sort]})" + " #{params[:direction]}").all 
       #end
     else  
       @studysessions = Studysession.order("lower(subject) ASC").all #default - sort alphabetically
