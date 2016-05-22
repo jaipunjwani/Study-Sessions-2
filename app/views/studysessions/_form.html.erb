@@ -1,9 +1,9 @@
 <%= form_for(@studysession) do |f| %>
   <% if @studysession.errors.any? %>
-    <div id="error_explanation">
+    <div class="error_explanation">
       <h2><%= pluralize(@studysession.errors.count, "error") %> prohibited this studysession from being saved:</h2>
 
-      <ul>
+      <ul class = "errorlist">
       <% @studysession.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
@@ -24,9 +24,6 @@
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <!-- f.submit "Save Session" %> -->
     <%= f.submit "Save Session", class: "btn btn-default" %>
-    
-    
   </div>
 <% end %>

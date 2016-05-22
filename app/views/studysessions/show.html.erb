@@ -1,39 +1,49 @@
 <p id="notice"><%= notice %></p>
 
+
+<center>
+<table class="table table-striped">
+<tr> 
+	<td><%= "Subject"%></td>
+	<td><%= @studysession.subject %></td>
+</tr>
+<tr> 
+	<td><%= "Location"%></td>
+	<td><%= @studysession.location %></td>
+</tr>
+<tr> 
+	<td><%= "Description"%></td>
+	<td><%= @studysession.description %></td>
+</tr>
+<tr> 
+	<td><%= "Members"%></td>
+	<td><%= member_size(@studysession) %></td>
+</tr>
+<tr> 
+	<td><%= "Admin"%></td>
+	<td><%= get_leader(@studysession).email %></td>
+</tr>
+<tr> 
+	<td><%= "Created"%></td>
+	<td><%= @studysession.created_at %></td>
+</tr>
+<tr> 
+	<td><%= "Last Updated"%></td>
+	<td><%= @studysession.updated_at %></td>
+</tr>
+</table>
+</center>
+
 <div class= "show-session">
-<p>
-  <strong>Subject:</strong>
-  <%= @studysession.subject %>
-</p>
 
-<p>
-  <strong>Location:</strong>
-  <%= @studysession.location %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @studysession.description %>
-</p>
-<p>
-  <strong>Members:</strong>
-  <%= member_size(@studysession) %>
-</p>
-<p>
-  <strong>Admin:</strong>
-  <%=get_leader(@studysession).email%>
-</p>
-
-<p>
-  <strong>Created:</strong>
-  <%= @studysession.created_at %>
-</p>
-<strong>Last Updated:</strong>
-  <%= @studysession.updated_at %>
-<p>
-  
-</p>
-<%= link_to 'Edit', edit_studysession_path(@studysession) %> |
+<% if is_leader?(@studysession, current_user) %>
+<%= link_to 'Edit', edit_studysession_path(@studysession) %> 
+<%= link_to 'Delete', @studysession, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% elsif is_member?(@studysession, current_user) %>
+<%= link_to 'Leave', studysession_leave_session_path(@studysession.id) %>
+<% else %>
+<%= link_to 'Join', studysession_join_session_path(@studysession.id) %>
+<% end %>
 <%= link_to 'Back', studysessions_path %>
 
 </div>

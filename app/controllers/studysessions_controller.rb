@@ -86,26 +86,16 @@ class StudysessionsController < ApplicationController
   # GET /studysessions
   # GET /studysessions.json
   def index
- 
- #   @studysessions = Studysession.order("lower(subject) ASC").all
-  if params[:sort] != nil
-    #if params[:sort] == "members" 
-     # @studysessions = Studysession.all
-    #else
-      @studysessions = Studysession.order("lower(#{params[:sort]})").all 
+    if params[:sort] != nil
+      #if params[:sort] == "members" 
+      # @studysessions = Studysession.all
+      #else
+        @studysessions = Studysession.order("lower(#{params[:sort]})").all 
+      #end
+    else  
+      @studysessions = Studysession.order("lower(subject) ASC").all #default - sort alphabetically
+    end  
     #end
-  else  
-    @studysessions = Studysession.order("lower(subject) ASC").all #default - sort alphabetically
-  end  
-  
-
-  #not used right now
-    @userlist =[]
-    index =0
-    @studysessions.each do |session|
-      @userlist[index] = session.users
-      index = index + 1
-    end
   end
 
   # GET /studysessions/1
@@ -126,7 +116,6 @@ class StudysessionsController < ApplicationController
   # POST /studysessions.json
   def create
     @studysession = Studysession.new(studysession_params)
-   #studysession = current_user.studysessions.new(studysession_params)
     @studysession.users << current_user
     respond_to do |format|
       if @studysession.save
