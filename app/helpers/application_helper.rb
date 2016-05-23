@@ -3,6 +3,10 @@ module ApplicationHelper
   def sortable(column, title = nil)
     title ||= column.titleize
     direction = (column == params[:sort] && params[:direction] == "ASC") ? "DESC" : "ASC"
-    link_to title, :sort => column, :direction => direction
+    if params[:my] == 'true'
+      link_to title, :my => 'true', :sort => column, :direction => direction
+    else  
+      link_to title, :sort => column, :direction => direction
+    end
   end
 end

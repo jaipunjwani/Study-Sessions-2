@@ -7,14 +7,20 @@
 
 <% else %>
 <center>
+<ul class="nav nav-pills" role="tablist">
+  <li class="active"> <%= link_to 'All Sessions', studysessions_url %></li>
+  <li><%= link_to 'My Sessions',  :my => 'true' %></li>
+</ul>
+</center>
 
+<center>
 <table class="table table-striped">
   <div class ="table-header" >
   <thead>
     <tr>
-      <th><center><%= sortable 'subject', "Subject" %></center></th>
-      <th><center><%= sortable 'location', "Location" %></center></th>
-      <th><center><%= sortable 'description' , "Description" %></center></th>
+      <th><center><%= sortable 'subject' %></center></th>
+      <th><center><%= sortable 'location' %></center></th>
+      <th><center><%= sortable 'description' %></center></th>
       <th><center>Members</center></th>
       <th colspan="4"></th>
     </tr>
@@ -57,6 +63,10 @@
   <i class="glyphicon glyphicon-plus"></i> New Session
   <% end %>
   </center>
+  
+  <!-- test -->
+  <% @view_my_sessions = true %>
+  
   
   <!-- creating a button that is a link but also bold >
  <!-- <div class = 'btn btn-default'> <a href=studysessions/new><b>New</b> </a></div> >

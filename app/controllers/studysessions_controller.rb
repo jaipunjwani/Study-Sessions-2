@@ -1,6 +1,8 @@
 class StudysessionsController < ApplicationController
   before_action :set_studysession, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  @view_my_sessions =false; #default
+  
   
   def redir
     redirect_to studysessions_url
@@ -81,22 +83,41 @@ class StudysessionsController < ApplicationController
   end
   helper_method :test_multiple_members
   
+    #used to display only user's sessions (created or joined)
+  def my_sessions
+    @view_my_sessions = true;
+    @mysessions = current_user.studysessions.order("lower(subject) ASC")
+    
+  end
+  helper_method :my_sessions
+  
     
   
   # GET /studysessions
   # GET /studysessions.json
   def index
-    if params[:sort] != nil
-      #if params[:sort] == "members" 
-      # @studysessions = Studysession.all
-      #else
-        @studysessions = Studysession.order("lower(#{params[:sort]})" + " #{params[:direction]}").all 
-      #end
-    else  
-      @studysessions = Studysession.order("lower(subject) ASC").all #default - sort alphabetically
-    end  
-    #end
-  end
+    if params[:my] == 'true'
+      if params[:sort] == nil
+		    @studysessions = my_sessions
+	    else
+		    #my sessions, sorted according to parameters
+		    @studysessions = Studysession.order("lower(#{params[:sort]})" + " #{params[:direction]}").all 
+		    @studysessions = @studysessions.reject{|sess| !is_member?(sess, current_user)}
+		  end   
+	  else
+		  if params[:sort] == nil
+			  @studysessions = Studysession.order("lower(subject) ASC").all #default - sort alphabetically
+		  else
+			  @studysessions = Studysession.order("lower(#{params[:sort]})" + " #{params[:direction]}").all 	
+		  end	
+	  end
+end	
+	
+	
+	
+		
+	
+	
 
   # GET /studysessions/1
   # GET /studysessions/1.json

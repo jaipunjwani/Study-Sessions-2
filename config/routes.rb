@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   ActiveAdmin.routes(self)
   resources :studysessions do
-  get 'join_session', 'leave_session' #, on: :edit
+  get 'join_session', 'leave_session' # on: :edit
+  get 'my_sessions'
   end
   root 'studysessions#index'
   # The priority is based upon order of creation: first created -> highest priority.
